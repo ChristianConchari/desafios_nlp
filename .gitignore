@@ -133,3 +133,7 @@ cython_debug/
 .vscode/
 
 */data
+*.keras
+*.pkl
+*.zip
+*.vec
