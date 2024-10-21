@@ -32,6 +32,25 @@ En este desafío, se trabajó con una muestra de reseñas de productos del conju
 
 - **Visualización de Embeddings**: Se visualizaron los embeddings de las palabras seleccionadas en un espacio de 3 dimensiones, aplicando previamente una [reducción de dimensionalidad con TSNE](desafio_2/utils.py).
 
-    <img src="desafio_2/images/words_plot_1.png" alt="Desafio 2 Image 1" width="25%">
+    <img src="desafio_2/images/words_plot_1.png" alt="Desafio 2 Image 1" width="30%">
 
 El notebook con la solución se encuentra en [Desafío 2](desafio_2/solution_notebook.ipynb).
+
+## Desafío 3: Generación de Texto con LSTM basado en Shakespeare
+
+En este desafío, se trabajó con una muestra de las obras de Shakespeare para entrenar un modelo LSTM de generación de texto. Se trabajó en lo siguiente:
+
+- **Carga y Preparación de Datos**: Se cargaron los datos del archivo **shakespeare.txt** y se preprocesaron para segmentar el texto en palabras. Luego, se entrenó un `Tokenizer` para convertir las palabras en índices numéricos. Posteriormente, se dividió el conjunto de datos en entrenamiento y validación, y se aplicó padding para asegurar que todas las secuencias tuvieran la misma longitud.
+
+- **Entrenamiento del Modelo LSTM:** Se definió y entrenó un modelo LSTM secuencial utilizando Keras. El modelo incluye una capa de Embedding con una dimensión de salida de 300, seguida por dos capas Bidirectional LSTM con 128 unidades cada una y capas Dropout para reducir el sobreajuste. Finalmente, se añadió una capa Dense con activación softmax para la clasificación. Se utilizó el optimizador Adam y se implementó EarlyStopping.
+
+    <figure>
+        <img src="desafio_3/images/training_plots.png" alt="Desafio 3 Entrenamiento" width="50%">
+        <figcaption>
+            (Se puede observar en una gráfica cómo el perplexity del modelo disminuye a medida que avanza el entrenamiento, lo cual indica una mejora en la capacidad del modelo para generar texto coherente).
+        </figcaption>
+    </figure>
+
+- **Generación de Texto:** Tras el entrenamiento, se generaron nuevas secuencias de texto basadas en una "seed text". El modelo predijo palabras adicionales para completar las frases de manera mejorable pero con cierta coherencia.
+
+El notebook con la solución se encuentra en [Desafío 3](desafio_3/solution_notebook.ipynb).
