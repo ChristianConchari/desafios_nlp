@@ -138,3 +138,6 @@ cython_debug/
 *.pkl
 *.zip
 *.vec
+
+apps.csv
+reviews.csv
