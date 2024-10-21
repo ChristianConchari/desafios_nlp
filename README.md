@@ -50,3 +50,39 @@ En este desafío, se trabajó con una muestra de las obras de Shakespeare para e
 - **Generación de Texto:** Tras el entrenamiento, se generaron nuevas secuencias de texto basadas en una "seed text". El modelo predijo palabras adicionales para completar las frases de manera mejorable pero con cierta coherencia.
 
 El notebook con la solución se encuentra en [Desafío 3](desafio_3/solution_notebook.ipynb).
+
+## Desafío 4: Bot QA 
+
+En este desafío, se trabajó con un conjunto de datos de conversaciones para entrenar un bot de preguntas y respuestas (QA) utilizando una arquitectura encoder-decoder con LSTM y embeddings preentrenados de FastText. Se trabajó en lo siguiente:
+
+- **Carga y Preparación de Datos**: Se cargaron los datos del archivo data_volunteers.json, que contiene diálogos entre un bot y usuarios. Las oraciones de entrada y salida se limpiaron y prepararon añadiendo los tokens `<sos>` y `<eos>` para marcar el comienzo y final de las oraciones. Se descartaron las oraciones que superaban una longitud de 8 palabras.
+
+- **Tokenización y Padding**: Se utilizó el `Tokenizer` de Keras para tokenizar las oraciones de entrada y salida, creando los diccionarios `word2idx_inputs` y `word2idx_outputs`. Luego se aplicó padding para asegurar que todas las secuencias tuvieran la misma longitud. Obteniéndose `encoder_input_sequences`, `decoder_input_sequences` y `decoder_targets`.
+
+- **Preparación de Embeddings**: Se emplearon embeddings preentrenados de `FastText` para inicializar la capa de embeddings del modelo, utilizando la clase [FasttextEmbeddings](desafio_4/words_embeddings.py) para obtener la matriz de embeddings correspondiente.
+
+- **Entrenamiento del Modelo LSTM**: Se probó con el entrenamiento de dos modelos:
+
+    - **Modelo 1**: Se utilizó una arquitectura encoder-decoder sencilla con capas LSTM para el codificador y decodificador. El codificador consistió en una LSTM con 256 unidades, mientras que el decodificador también empleó una LSTM del mismo tamaño. Ambos conectados a una capa Embedding inicializada con los embeddings preentrenados de FastText. Finalmente, se añadió una capa densa con activación softmax para la predicción de las siguientes palabras en la secuencia.
+
+        <img src="desafio_4/model_plot.png" alt="Desafio 4 Modelo 1" width="50%">
+
+    - **Modelo 2**: Se utilizó una arquitectura encoder-decoder mejorada que incluía una capa Bidirectional LSTM con 512 unidades en el codificador y un mecanismo de Attention. Los estados hacia adelante y hacia atrás se concatenaron y se pasaron al decodificador, que utilizó una LSTM con 1024 unidades. Además, se aplicó el mecanismo de atención para mejorar el enfoque en las partes más relevantes de la secuencia de entrada. Finalmente, se añadió una capa densa con activación softmax y regularización L2. 
+
+        <img src="desafio_4/model_plot_with_bidirectional_attention.png" alt="Desafio 4 Modelo 2" width="50%">
+
+
+- **Generación de Respuestas**: El modelo mostró la capacidad de generar respuestas coherentes y relacionadas con las preguntas de entrada. Algunos ejemplos destacados fueron:
+
+    - **Pregunta**: "where are you from"
+    - **Respuesta**: i am from the us (modelo 1)
+
+    - **Pregunta**: "Do you read?"
+    - **Respuesta**: i do not like to read (modelo 2)
+
+    - **Pregunta**: "Hello, do you play any sports?"
+    - **Respuesta**: i do not like to (modelo 2)
+
+    Las respuestas son destacables debido a lo limitado del conjunto de datos y la relativa simplicidad de los modelos.
+
+El notebook con la solución se encuentra en [Desafío 4](desafio_4/solution_notebook.ipynb).
