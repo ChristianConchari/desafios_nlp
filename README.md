@@ -43,13 +43,9 @@ En este desafío, se trabajó con una muestra de las obras de Shakespeare para e
 - **Carga y Preparación de Datos**: Se cargaron los datos del archivo **shakespeare.txt** y se preprocesaron para segmentar el texto en palabras. Luego, se entrenó un `Tokenizer` para convertir las palabras en índices numéricos. Posteriormente, se dividió el conjunto de datos en entrenamiento y validación, y se aplicó padding para asegurar que todas las secuencias tuvieran la misma longitud.
 
 - **Entrenamiento del Modelo LSTM:** Se definió y entrenó un modelo LSTM secuencial utilizando Keras. El modelo incluye una capa de Embedding con una dimensión de salida de 300, seguida por dos capas Bidirectional LSTM con 128 unidades cada una y capas Dropout para reducir el sobreajuste. Finalmente, se añadió una capa Dense con activación softmax para la clasificación. Se utilizó el optimizador Adam y se implementó EarlyStopping.
-
-    <figure>
-        <img src="desafio_3/images/training_plots.png" alt="Desafio 3 Entrenamiento" width="50%">
-        <figcaption>
-            (Se puede observar en una gráfica cómo el perplexity del modelo disminuye a medida que avanza el entrenamiento, lo cual indica una mejora en la capacidad del modelo para generar texto coherente).
-        </figcaption>
-    </figure>
+    
+    <img src="desafio_3/images/training_plots.png" alt="Desafio 3 Entrenamiento" width="50%">
+    <div>(Se puede observar en una gráfica cómo el perplexity del modelo disminuye a medida que avanza el entrenamiento, lo cual indica una mejora en la capacidad del modelo para generar texto coherente).</div>   
 
 - **Generación de Texto:** Tras el entrenamiento, se generaron nuevas secuencias de texto basadas en una "seed text". El modelo predijo palabras adicionales para completar las frases de manera mejorable pero con cierta coherencia.
 
