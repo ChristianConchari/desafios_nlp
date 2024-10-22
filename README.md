@@ -86,3 +86,28 @@ En este desafío, se trabajó con un conjunto de datos de conversaciones para en
     Las respuestas son destacables debido a lo limitado del conjunto de datos y la relativa simplicidad de los modelos.
 
 El notebook con la solución se encuentra en [Desafío 4](desafio_4/solution_notebook.ipynb).
+
+## Desafío 5: Clasificación de Sentimientos con BERT
+
+En este desafío, se trabajó en la clasificación de críticas de Google Apps para predecir el sentimiento utilizando un modelo basado en BERT. Se trabajó en lo siguiente:
+
+- **Tokenización y División de Datos**: Después de limpiar y balancear el dataset, se tokenizaron las críticas utilizando el tokenizador de BERT y se dividió el dataset en conjuntos de entrenamiento, validación y test.
+
+- **Entrenamiento del Modelo BERT (pesos congelados)**: Se utilizó un modelo BERT preentrenado con pesos congelados, añadiendo varias capas densas con Batch Normalization y activación ReLU para la clasificación de sentimientos. Se aplicó dropout y regularización L2 para evitar el sobreajuste.
+
+- **Entrenamiento del Modelo BERT (fine-tuning)**: Se realizó un fine-tuning del modelo BERT, permitiendo que todas las capas fueran entrenables y añadiendo capas densas con regularización L2 y dropout para mejorar la generalización. Se redujo el número de épocas para prevenir el sobreajuste.
+
+- **Resultados**: Aunque ambos modelos no lograron alcanzar métricas destacables, demostraron la capacidad de BERT para clasificar las críticas con un rendimiento aceptable. Con un dataset más grande y más diverso, es probable que se puedan obtener mejores resultados. 
+
+    Algunos ejemplos de predicciones del modelo fine-tuning fueron:
+
+    - **Crítica**: "I love this app"
+    - **Sentimiento Predicho**: Positive
+
+    - **Crítica**: "I hate this product, it is terrible!"
+    - **Sentimiento Predicho**: Negative
+
+    - **Crítica**: ""The app is okay, nothing special."
+    - **Sentimiento Predicho**: Neutral
+
+El notebook con la solución se encuentra en [Desafío 5](desafio_5/solution_notebook.ipynb).
